@@ -1,96 +1,455 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script defer src="/_vercel/insights/script.js"></script>
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/@exampledev/new.css@1.1.2/new.min.css"
-    />
-    <title>Vercel HTML Starter</title>
-    <meta
-      name="description"
-      content="High-performance HTML based website template."
-    />
-  </head>
-  <body>
-    <h1>Vercel HTML Starter</h1>
-    <p>
-      This template is a simple, but powerful single
-      <code>index.html</code> file deployed to
-      <a href="https://vercel.com">Vercel</a>. When your site is deployed, all
-      static assets (like HTML, JavaScript, CSS, images, and more) are deployed
-      globally to every
-      <a href="https://vercel.com/docs/concepts/edge-network/overview"
-        >Vercel Edge Network</a
-      >
-      region.
-    </p>
-    <h2>Simple, privacy-friendly analytics</h2>
-    <p>
-      Want to understand your visitor traffic? Vercel Analytics gives you
-      first-party, privacy-friendly traffic analytics for your HTML site. This
-      template is already configured using the following script:
-    </p>
-    <pre><code>&lt;script defer src="/_vercel/insights/script.js"&gt;&lt;/script&gt;</code></pre>
-    <p>
-      Learn more about
-      <a href="https://vercel.com/analytics">Vercel Analytics</a>.
-    </p>
-    <h2>Integrated with git</h2>
-    <p>
-      Deploying updates to your site is as simple as
-      <code>git push</code> thanks to Vercel's advanced
-      <a href="https://vercel.com/docs/concepts/git">Git Integration</a>.
-      Support for GitHub, GitLab, Bitbucket is zero-configuration, and with the
-      flexible Vercel CLI and API, you can integrate with any tool possible.
-    </p>
-    <p>
-      Learn more about
-      <a href="https://vercel.com/docs/concepts/git">Git Integration</a>.
-    </p>
-    <h2>Fast <code>gzip</code> compression</h2>
-    <p>
-      To help ensure the smallest possible file sizes for your static assets,
-      the Vercel Edge Network compresses files by default using
-      <code>gzip</code>. You can also optionally use
-      <code>brotli</code> compressesion if you prefer.
-    </p>
-    <p>
-      Learn more about
-      <a href="https://vercel.com/docs/concepts/edge-network/compression"
-        >compression</a
-      >.
-    </p>
-    <h2>Advanced routing configuration</h2>
-    <p>
-      Vercel gives you a variety of ways to configure the routing of your
-      website. For example, adding redirects, rewrites, or headers to your page.
-      While you can use <code>vercel.json</code> to define these through JSON,
-      you can also express your routing configuration as code using
-      <a href="https://vercel.com/docs/concepts/functions/edge-middleware"
-        >Vercel Edge Middleware</a
-      >.
-    </p>
-    <p>
-      Middleware runs before the
-      <a href="https://vercel.com/docs/concepts/edge-network/caching"
-        >Vercel Edge Network Cache</a
-      >, so you can configure routing exactly as your application needs. For
-      example, this template uses <code>middleware.js</code> defined in the root
-      of the repository to add additional security headers to the site:
-    </p>
-    <pre><code>referrer-policy: origin-when-cross-origin
-strict-transport-security: max-age=31536000; includeSubDomains; preload
-x-content-type-options: nosniff
-x-dns-prefetch-control: on
-x-frame-options: DENY</code></pre>
-    <p>
-      Learn more about
-      <a href="https://vercel.com/docs/concepts/functions/edge-middleware"
-        >Vercel Edge Middleware</a
-      >.
-    </p>
-  </body>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Fortnite Scrims Tracker</title>
+  <!-- Include Chart.js from a CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    /* Overall Dark Theme */
+    body {
+      background-color: #121212; /* Dark background */
+      color: #ffffff;           /* Light text */
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    h1 {
+      text-align: center;
+      padding: 20px;
+      margin: 0;
+      background-color: #1f1f1f; /* Slightly lighter background for header */
+      border-bottom: 2px solid #2196f3; /* Blue accent line */
+    }
+    /* Container for everything */
+    .container {
+      max-width: 1200px;
+      margin: 20px auto;
+      padding: 0 20px;
+    }
+    /* Summary section styling */
+    #summary {
+      background-color: #1f1f1f;
+      padding: 20px;
+      border-radius: 6px;
+      border: 1px solid #333;
+      margin-bottom: 30px;
+    }
+    #summary h2 {
+      margin-top: 0;
+      color: #2196f3;
+    }
+    #summary p {
+      margin: 6px 0;
+    }
+    /* Form styling */
+    #scrimForm {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+      background-color: #1f1f1f;
+      padding: 20px;
+      border-radius: 6px;
+      margin-bottom: 30px;
+      border: 1px solid #333;
+    }
+    #scrimForm label {
+      align-self: center;
+    }
+    #scrimForm input,
+    #scrimForm select {
+      padding: 8px;
+      border-radius: 4px;
+      border: 1px solid #444;
+      background-color: #121212;
+      color: #ffffff;
+    }
+    #scrimForm input::placeholder {
+      color: #999;
+    }
+    #scrimForm button {
+      grid-column: 1 / -1;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      background-color: #2196f3;
+      color: #ffffff;
+      font-size: 16px;
+      cursor: pointer;
+      width: 120px;
+      justify-self: center;
+    }
+    #scrimForm button:hover {
+      background-color: #1b82d1;
+    }
+    /* Table styling */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 30px;
+      background-color: #1f1f1f;
+      border: 1px solid #333;
+      border-radius: 6px;
+      overflow: hidden;
+    }
+    table thead {
+      background-color: #2196f3;
+    }
+    table th, table td {
+      padding: 10px;
+      text-align: center;
+      border-bottom: 1px solid #333;
+      color: #fff;
+      white-space: normal;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+    }
+    table th {
+      font-weight: bold;
+    }
+    table tbody tr:hover {
+      background-color: #2a2a2a;
+    }
+    /* Force long text columns to wrap and have a max width */
+    table td:nth-child(6),
+    table td:nth-child(7),
+    table td:nth-child(8) {
+      max-width: 250px;
+      text-align: left;
+    }
+    /* Action buttons for edit/delete */
+    .action-btn {
+      cursor: pointer;
+      padding: 5px 10px;
+      border: none;
+      border-radius: 4px;
+      margin: 0 2px;
+    }
+    .edit-btn {
+      background-color: #4caf50;
+      color: #fff;
+    }
+    .edit-btn:hover {
+      background-color: #43a047;
+    }
+    .delete-btn {
+      background-color: #f44336;
+      color: #fff;
+    }
+    .delete-btn:hover {
+      background-color: #e53935;
+    }
+    /* Chart container */
+    #chartContainer {
+      width: 100%;
+      max-width: 1000px;
+      margin: 0 auto 50px auto;
+      height: 500px;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Fortnite Scrims Progress Tracker</h1>
+<div class="container">
+  
+  <!-- Summary Section -->
+  <div id="summary">
+    <h2>Summary</h2>
+    <p id="totalGames">Total Games: 0</p>
+    <p id="avgPlacement">Average Placement: 0</p>
+    <p id="avgKills">Average Kills: 0</p>
+    <p id="bestPlacement">Best Placement: N/A</p>
+    <p id="mostKills">Most Kills: N/A</p>
+  </div>
+
+  <!-- Form to add or edit a scrim result -->
+  <form id="scrimForm">
+    <label for="date">Date:</label>
+    <input type="date" id="date" required>
+
+    <label for="typeOfScrim">Type of Scrim:</label>
+    <select id="typeOfScrim">
+      <option value="Solo">Solo</option>
+      <option value="Duo">Duo</option>
+      <option value="Trio">Trio</option>
+      <option value="Squad">Squad</option>
+    </select>
+
+    <label for="placement">Placement:</label>
+    <input type="number" id="placement" placeholder="e.g. 1, 5, 10..." required>
+
+    <label for="kills">Kills:</label>
+    <input type="number" id="kills" placeholder="Number of kills" required>
+
+    <label for="mainMistake">Main Mistake:</label>
+    <input type="text" id="mainMistake" placeholder="Short summary (e.g. rotated late)">
+
+    <label for="details">Details:</label>
+    <input type="text" id="details" placeholder="More detailed explanation">
+
+    <label for="conclusion">Conclusion:</label>
+    <input type="text" id="conclusion" placeholder="How to fix / improve">
+
+    <button type="button" id="submitBtn" onclick="handleFormSubmit()">Add Game</button>
+  </form>
+
+  <!-- Table to display scrim results -->
+  <table id="gamesTable">
+    <thead>
+      <tr>
+        <th>Game #</th>
+        <th>Date</th>
+        <th>Type</th>
+        <th>Placement</th>
+        <th>Kills</th>
+        <th>Main Mistake</th>
+        <th>Details</th>
+        <th>Conclusion</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Rows will be added dynamically by JavaScript -->
+    </tbody>
+  </table>
+
+  <!-- Container for the progression chart -->
+  <div id="chartContainer">
+    <canvas id="myChart"></canvas>
+  </div>
+</div>
+
+<script>
+  // Array to store all scrim data
+  let gamesData = [];
+  // Keep track of how many games have been added (used to label "Game #")
+  let gameCount = 0;
+  // Track if we are editing an entry (null means adding a new one)
+  let editIndex = null;
+
+  // Get references to the form fields
+  const dateInput = document.getElementById('date');
+  const typeOfScrimInput = document.getElementById('typeOfScrim');
+  const placementInput = document.getElementById('placement');
+  const killsInput = document.getElementById('kills');
+  const mainMistakeInput = document.getElementById('mainMistake');
+  const detailsInput = document.getElementById('details');
+  const conclusionInput = document.getElementById('conclusion');
+  const submitBtn = document.getElementById('submitBtn');
+
+  // Chart.js initialization
+  const ctx = document.getElementById('myChart').getContext('2d');
+  const myChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: [], // Will hold "Game 1", "Game 2", etc.
+      datasets: [
+        {
+          label: 'Placement',
+          data: [],
+          borderColor: '#00bcd4',
+          fill: false,
+          tension: 0.1,
+          yAxisID: 'yPlacement'
+        },
+        {
+          label: 'Kills',
+          data: [],
+          borderColor: '#2196f3',
+          fill: false,
+          tension: 0.1,
+          yAxisID: 'yKills'
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      backgroundColor: '#121212',
+      scales: {
+        yPlacement: {
+          type: 'linear',
+          position: 'left',
+          reverse: true,
+          title: {
+            display: true,
+            text: 'Placement (lower is better)',
+            color: '#ffffff'
+          },
+          grid: { color: '#333' },
+          ticks: { color: '#ffffff', stepSize: 1 }
+        },
+        yKills: {
+          type: 'linear',
+          position: 'right',
+          title: {
+            display: true,
+            text: 'Kills',
+            color: '#ffffff'
+          },
+          grid: { drawOnChartArea: false, color: '#333' },
+          ticks: { color: '#ffffff' },
+          suggestedMin: 0
+        },
+        x: {
+          ticks: { color: '#ffffff' },
+          grid: { color: '#333' }
+        }
+      },
+      plugins: {
+        legend: { labels: { color: '#ffffff' } }
+      }
+    }
+  });
+
+  // On page load, load saved data from localStorage (if any)
+  window.onload = function() {
+    const savedData = localStorage.getItem('gamesData');
+    if (savedData) {
+      gamesData = JSON.parse(savedData);
+      gameCount = gamesData.reduce((max, g) => Math.max(max, g.gameNumber), 0);
+      updateTable();
+      updateChart();
+      updateSummary();
+    }
+  };
+
+  // Handler for Add/Edit button
+  function handleFormSubmit() {
+    if (editIndex === null) {
+      addGame();
+    } else {
+      updateGame(editIndex);
+    }
+  }
+
+  // Add a new game from form values
+  function addGame() {
+    const newGame = {
+      gameNumber: ++gameCount,
+      date: dateInput.value,
+      scrimType: typeOfScrimInput.value,
+      placement: parseInt(placementInput.value) || 0,
+      kills: parseInt(killsInput.value) || 0,
+      mainMistake: mainMistakeInput.value.trim(),
+      details: detailsInput.value.trim(),
+      conclusion: conclusionInput.value.trim()
+    };
+    gamesData.push(newGame);
+    updateAll();
+    document.getElementById('scrimForm').reset();
+  }
+
+  // Update an existing game entry
+  function updateGame(index) {
+    gamesData[index].date = dateInput.value;
+    gamesData[index].scrimType = typeOfScrimInput.value;
+    gamesData[index].placement = parseInt(placementInput.value) || 0;
+    gamesData[index].kills = parseInt(killsInput.value) || 0;
+    gamesData[index].mainMistake = mainMistakeInput.value.trim();
+    gamesData[index].details = detailsInput.value.trim();
+    gamesData[index].conclusion = conclusionInput.value.trim();
+    editIndex = null;
+    submitBtn.textContent = 'Add Game';
+    updateAll();
+    document.getElementById('scrimForm').reset();
+  }
+
+  // Update table, chart, summary and then save data
+  function updateAll() {
+    updateTable();
+    updateChart();
+    updateSummary();
+    saveData();
+  }
+
+  // Update the table with game data
+  function updateTable() {
+    const tableBody = document.getElementById('gamesTable').getElementsByTagName('tbody')[0];
+    tableBody.innerHTML = "";
+    gamesData.forEach((game, index) => {
+      let row = tableBody.insertRow();
+      row.insertCell(0).innerText = game.gameNumber;
+      row.insertCell(1).innerText = game.date;
+      row.insertCell(2).innerText = game.scrimType;
+      row.insertCell(3).innerText = game.placement;
+      row.insertCell(4).innerText = game.kills;
+      row.insertCell(5).innerText = game.mainMistake;
+      row.insertCell(6).innerText = game.details;
+      row.insertCell(7).innerText = game.conclusion;
+      let actionsCell = row.insertCell(8);
+      let editBtn = document.createElement('button');
+      editBtn.innerText = 'Edit';
+      editBtn.className = 'action-btn edit-btn';
+      editBtn.onclick = () => editGame(index);
+      let deleteBtn = document.createElement('button');
+      deleteBtn.innerText = 'Delete';
+      deleteBtn.className = 'action-btn delete-btn';
+      deleteBtn.onclick = () => deleteGame(index);
+      actionsCell.appendChild(editBtn);
+      actionsCell.appendChild(deleteBtn);
+    });
+  }
+
+  // Update the Chart.js chart with game data
+  function updateChart() {
+    myChart.data.labels = gamesData.map(game => `Game ${game.gameNumber}`);
+    myChart.data.datasets[0].data = gamesData.map(game => game.placement);
+    myChart.data.datasets[1].data = gamesData.map(game => game.kills);
+    myChart.update();
+  }
+
+  // Update summary stats
+  function updateSummary() {
+    const totalGames = gamesData.length;
+    document.getElementById('totalGames').textContent = `Total Games: ${totalGames}`;
+    if (totalGames > 0) {
+      let totalPlacement = 0, totalKills = 0, bestPlacement = Infinity, mostKills = 0;
+      gamesData.forEach(game => {
+        totalPlacement += game.placement;
+        totalKills += game.kills;
+        if (game.placement < bestPlacement) bestPlacement = game.placement;
+        if (game.kills > mostKills) mostKills = game.kills;
+      });
+      document.getElementById('avgPlacement').textContent = `Average Placement: ${(totalPlacement / totalGames).toFixed(2)}`;
+      document.getElementById('avgKills').textContent = `Average Kills: ${(totalKills / totalGames).toFixed(2)}`;
+      document.getElementById('bestPlacement').textContent = `Best Placement: ${bestPlacement}`;
+      document.getElementById('mostKills').textContent = `Most Kills: ${mostKills}`;
+    } else {
+      document.getElementById('avgPlacement').textContent = 'Average Placement: 0';
+      document.getElementById('avgKills').textContent = 'Average Kills: 0';
+      document.getElementById('bestPlacement').textContent = 'Best Placement: N/A';
+      document.getElementById('mostKills').textContent = 'Most Kills: N/A';
+    }
+  }
+
+  // Save data to localStorage (the data store)
+  function saveData() {
+    localStorage.setItem('gamesData', JSON.stringify(gamesData));
+  }
+
+  // Delete a game entry
+  function deleteGame(index) {
+    if (!confirm('Are you sure you want to delete this entry?')) return;
+    gamesData.splice(index, 1);
+    updateAll();
+  }
+
+  // Populate the form for editing a game
+  function editGame(index) {
+    const game = gamesData[index];
+    editIndex = index;
+    dateInput.value = game.date;
+    typeOfScrimInput.value = game.scrimType;
+    placementInput.value = game.placement;
+    killsInput.value = game.kills;
+    mainMistakeInput.value = game.mainMistake;
+    detailsInput.value = game.details;
+    conclusionInput.value = game.conclusion;
+    submitBtn.textContent = 'Save Changes';
+  }
+</script>
+
+</body>
 </html>
